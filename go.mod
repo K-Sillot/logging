@@ -1,9 +1,9 @@
-module github.com/siyuan-note/logging
+module github.com/K-Sillot/logging
 
 go 1.18
 
 require (
-	github.com/88250/gulu v1.2.2
+	github.com/K-Sillot/gulu v1.2.2
 	github.com/getsentry/sentry-go v0.18.0
 )
 
