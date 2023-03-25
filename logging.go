@@ -27,7 +27,7 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/88250/gulu"
+	"github.com/K-Sillot/gulu"
 	"github.com/getsentry/sentry-go"
 )
 
