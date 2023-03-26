@@ -3,7 +3,7 @@ module github.com/K-Sillot/logging
 go 1.18
 
 require (
-	github.com/K-Sillot/gulu v1.2.2
+	github.com/K-Sillot/gulu v0.0.1
 	github.com/getsentry/sentry-go v0.18.0
 )
 

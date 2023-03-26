@@ -1,3 +1,3 @@
 # Logging
 
-Logging for SiYuan.
+Logging for Sillot.
