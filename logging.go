@@ -32,14 +32,13 @@ import (
 )
 
 const (
-	ExitCodeReadOnlyDatabase      = 20 // 数据库文件被锁
-	ExitCodeUnavailablePort       = 21 // 端口不可用
-	ExitCodeCreateConfDirErr      = 22 // 创建配置目录失败
-	ExitCodeWorkspaceLocked       = 24 // 工作空间已被锁定
-	ExitCodeCreateWorkspaceDirErr = 25 // 创建工作空间失败
-	ExitCodeFileSysErr            = 26 // 文件系统错误
-	ExitCodeOk                    = 0  // 正常退出
-	ExitCodeFatal                 = 1  // 致命错误
+	ExitCodeReadOnlyDatabase = 20 // 数据库文件被锁
+	ExitCodeUnavailablePort  = 21 // 端口不可用
+	ExitCodeWorkspaceLocked  = 24 // 工作空间已被锁定
+	ExitCodeInitWorkspaceErr = 25 // 初始化工作空间失败
+	ExitCodeFileSysErr       = 26 // 文件系统错误
+	ExitCodeOk               = 0  // 正常退出
+	ExitCodeFatal            = 1  // 致命错误
 )
 
 func ShortStack() string {
@@ -134,10 +133,17 @@ func openLogger() {
 		}
 	}
 
+	dir, _ := filepath.Split(LogPath)
+	if !gulu.File.IsExist(dir) {
+		if err := os.MkdirAll(dir, 0755); nil != err {
+			stdlog.Printf("create log dir [%s] failed: %s", dir, err)
+		}
+	}
+
 	var err error
 	logFile, err = os.OpenFile(LogPath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
 	if nil != err {
-		stdlog.Fatalf("create log file [%s] failed: %s", LogPath, err)
+		stdlog.Printf("create log file [%s] failed: %s", LogPath, err)
 	}
 	logger = NewLogger(io.MultiWriter(os.Stdout, logFile))
 }
